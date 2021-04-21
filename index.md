@@ -8,7 +8,7 @@ The current version of [allolib](https://github.com/AlloSphere-Research-Group/al
 
 1. **Method 1: the "hack":**
 This method is deemed as a "hack" because it is a very quick solution that could cause issues.  It is however better than nothing, as an unprompted change of audio device will cause [allolib_playground](https://github.com/allolib-s21/allolib_playground) to crash anyway.  At least this method will give you a way of manually switching between devices to avoid these crashes, however it will probably be seen as a pain in any user's eyes.  First we go over the code to be added.
-  1. First we will need to override the `bool onKeyDown(Keyboard const& k)` function of of the [App](https://allosphere-research-group.github.io/allolib-doc/classal_1_1_app.html) class.  In order to do this, inside your class extending `al::App` we need to add the following code, if it does not already exist:
+   1. First we will need to override the `bool onKeyDown(Keyboard const& k)` function of of the [App](https://allosphere-research-group.github.io/allolib-doc/classal_1_1_app.html) class.  In order to do this, inside your class extending `al::App` we need to add the following code, if it does not already exist:
     
       ```cpp
       bool onKeyDown(Keyboard const& k) override {
