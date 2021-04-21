@@ -14,15 +14,12 @@ This method is deemed as a "hack" because it is a very quick solution that could
         if (ParameterGUI::usingKeyboard()) {  // Ignore keys if GUI is using them
           return true;
         }
-        // there may be existing code here
         // we will be adding more code here as well soon...
+        // there may be existing code here
       }
       ```
-   2. 
-
-   
-   2. If the code above is already in your project, you can skip that step.  We will now add these next couple lines after the first if statement shown above, and within the `onKeyDown` function:
-    ```cpp
+   2. If the code above is already in your project, you can skip that step.  We now need to decide how the user will go about changing the default output.  I have chosen <kbd>Ctrl</kbd>+<kbd>d</kbd> for deactivate and <kbd>Ctrl</kbd>+<kbd>a</kbd> for activate.  When the user uses the shortcut to deactivate, they will disconnect their app from sound output, and when the user uses the shortcut to activate, we will find the default audio device and connect to it for output.  We will now add the next couple lines to do this, after the first if statement shown above, and within the `onKeyDown` function:
+      ```cpp
       if(k.ctrl()) {
         int asciiCode = k.key();
         if(asciiCode == 100) { // ctrl-d pressed => deactivate current output device
@@ -33,5 +30,7 @@ This method is deemed as a "hack" because it is a very quick solution that could
           audioIO().start();
         }
       }
-    ```
-    
+      ```
+   3. *Caveats*: This code assumes that the new default output device you connect to has a sample rate of 48000 and has 2 audio channels.  If this is not the case the according code can be modified.  You can also compute the ascii code outside of the if statements if desired in order to use the value in all if statements.
+   4. *Instructions for user use*:  When the user desires to change the ouput device, they must first deactivate their current output device, ensure the new device they want to connect to is the default device, then re-activate the audio output.  If the user removes an audio device before it is deactivated the application will crash (this happens even without this code as I mentioned above, so it is better to at least have the option to deactivate it).  If the user tries to activate any device while a stream to some device is already open, allolib/RtAudio will prevent this from happening and so no issues will occur.
+
