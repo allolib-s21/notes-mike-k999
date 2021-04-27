@@ -32,7 +32,23 @@ This method is deemed as a "hack" because it is a very quick solution that could
       }
       ```
    3. *Caveats*: This code assumes that the new default output device you connect to has a sample rate of 48000 and has 2 audio channels.  If this is not the case the according code can be modified.  You can also compute the ascii code outside of the if statements if desired in order to use the value in all if statements.
-   4. *Instructions for user use*:  When the user desires to change the ouput device, they must first deactivate their current output device, ensure the new device they want to connect to is the default device, then re-activate the audio output.  If the user removes an audio device before it is deactivated the application will crash (this happens even without this code as I mentioned above, so it is better to at least have the option to deactivate it).  If the user tries to activate any device while a stream to some device is already open, allolib/RtAudio will prevent this from happening and so no issues will occur.
+   4. *Instructions for user use*:  When the user desires to change the ouput device, they must first deactivate their current output device (with <kbd>Ctrl</kbd>+<kbd>d</kbd>) *while it is still connected*, ensure the new device they want to connect to is the default device, then re-activate the audio output on the new device (with <kbd>Ctrl</kbd>+<kbd>a</kbd>).  If the user removes an audio device before it is deactivated the application will crash (this happens even without this code as I mentioned above, so it is better to at least have the option to deactivate it).  If the user tries to activate any device while a stream to some device is already open, allolib/RtAudio will prevent this from happening and so no issues will occur.
 
 2. **Method 2 - the new and improved "hack":**
+Rather than including the second block of code from the original "hack", you can include this code:
+   ```cpp
+      if(k.ctrl()) {
+         int asciiCode = k.key();
+         if(asciiCode == 100) {
+            audioIO().close();
+         }
+         if(asciiCode == 97) {
+            al::AudioDevice dev_out = al::AudioDevice::defaultOutput();
+            configureAudio(dev_out, dev_out.defaultSampleRate(), 512, dev_out.channelsOutMax(), 0);
+            audioIO().start()
+         }
+      }
+   ```
+The benefit of this code over the previous method is that it will start the current audio device while making sure we configure it with the proper parameters.
+You can also use a similar method for switching input devices.  (Coming soon!)
 
