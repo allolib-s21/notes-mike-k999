@@ -34,3 +34,5 @@ This method is deemed as a "hack" because it is a very quick solution that could
    3. *Caveats*: This code assumes that the new default output device you connect to has a sample rate of 48000 and has 2 audio channels.  If this is not the case the according code can be modified.  You can also compute the ascii code outside of the if statements if desired in order to use the value in all if statements.
    4. *Instructions for user use*:  When the user desires to change the ouput device, they must first deactivate their current output device, ensure the new device they want to connect to is the default device, then re-activate the audio output.  If the user removes an audio device before it is deactivated the application will crash (this happens even without this code as I mentioned above, so it is better to at least have the option to deactivate it).  If the user tries to activate any device while a stream to some device is already open, allolib/RtAudio will prevent this from happening and so no issues will occur.
 
+2. **Method 2 - the new and improved "hack":**
+
