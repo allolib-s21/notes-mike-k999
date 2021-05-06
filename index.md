@@ -49,6 +49,6 @@ Rather than including the second block of code from the original "hack", you can
          }
       }
    ```
-The benefit of this code over the previous method is that it will start the current audio device while making sure we configure it with the proper parameters.
+The benefit of this code over the previous method is that it will start the current audio device while making sure we configure it with the proper parameters.  There is an example in my [alloplayground demos repo](https://github.com/allolib-s21/alloplayground-mike-k999).
 You can also use a similar method for switching input devices.  (Coming soon!)
 
