@@ -57,23 +57,3 @@ You can also use a similar method for switching input devices.
 
 ### The .track file
 Get the code for this [here](https://github.com/allolib-s21/alloplayground-mike-k999) (the demo is called "tutti").
-#### Syntax for the .track file
-Defining voices:
-```bash
-   ~voice [voice_name] [.preset file_name]
-```
-`voice name` is a user defined name for the voice
-`.preset file_name` should be the name of the .preset file to use for the voice, without the extension
-```bash
-   ~seq [sequence_name] [.synthSequence file_name] [time_offset]
-```
-```bash
-   ~sig [numerator] [denominator]
-```
-```bash
-   ~tempo [beats_per_minute]
-```
-```bash
-   ~part [voice_name]
-   ...
-```
